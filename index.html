@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            position: relative;
+        }
+        .step {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+            height: 60px;
+        }
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: absolute;
+        }
+        .yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            left: 50px;
+        }
+        .noBtn {
+            background-color: #f44336;
+            color: white;
+            right: 50px;
+        }
+        #finalMessage {
+            display: none;
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="step1" class="step active">
+            <h1>Tui ki sampa r vatar?</h1>
+            <div class="buttons">
+                <button class="yesBtn">Yes</button>
+                <button class="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="step2" class="step">
+            <h1>Party Dibi ki na ?</h1>
+            <div class="buttons">
+                <button class="noBtn">No</button>
+                <button class="yesBtn">Yes</button>
+            </div>
+        </div>
+
+        <div id="step3" class="step">
+            <h1>tor baper name ki kamal?</h1>
+            <div class="buttons">
+                <button class="yesBtn">Yes</button>
+                <button class="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="finalMessage">
+            <h1>Happy Birthday to You Dear brother Deb! 🤛💦🎉</h1>
+        </div>
+    </div>
+
+    <script>
+        const steps = document.querySelectorAll('.step');
+        let currentStep = 0;
+
+        function nextStep() {
+            steps[currentStep].classList.remove('active');
+            currentStep++;
+            if (currentStep < steps.length) {
+                steps[currentStep].classList.add('active');
+            } else {
+                document.getElementById('finalMessage').style.display = 'block';
+            }
+        }
+
+        document.querySelectorAll('.yesBtn').forEach(button => {
+            button.addEventListener('click', nextStep);
+        });
+
+        document.querySelectorAll('.noBtn').forEach(button => {
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault(); 
+                const container = button.closest('.container');
+                const x = Math.floor(Math.random() * (container.offsetWidth - button.offsetWidth));
+                const y = Math.floor(Math.random() * (container.offsetHeight - button.offsetHeight));
+
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            });
+        });
+    </script>
+</body>
+</html>
